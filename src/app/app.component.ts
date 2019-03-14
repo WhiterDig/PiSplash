@@ -23,7 +23,7 @@ export class AppComponent {
   postCreds(ssid = this.ssid, password = this.password) {
     this.loading = true;
     this.http.post(
-      'http://localhost:8080',
+      'http://localhost:8080/do-things',
       {
         ssid,
         password
@@ -32,17 +32,11 @@ export class AppComponent {
         take(1)
       ).subscribe(
         () => {
-          this.snackBar.open('Successfully submitted', '', {
-            duration: 2000
-          });
           this.loading = false;
-        },
-        () => {
-          this.snackBar.open('An error occured', '', {
-            duration: 2000
-          });
+         },
+         () => {
           this.loading = false;
-        }
+         }
       );
   }
 }

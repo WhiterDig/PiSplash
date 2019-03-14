@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
 export class AppComponent {
   ssid: string;
   password: string;
+  email: string;
   loading = false;
 
   constructor(
@@ -20,18 +21,22 @@ export class AppComponent {
     private snackBar: MatSnackBar
   ) { }
 
-  postCreds(ssid = this.ssid, password = this.password) {
+  postCreds(ssid = this.ssid, password = this.password, email = this.email) {
     this.loading = true;
     this.http.post(
       'http://localhost:8080/do-things',
       {
         ssid,
-        password
+        password,
+        email
       }
       ).pipe(
         take(1)
       ).subscribe(
         () => {
+          this.loading = false;
+         },
+         () => {
           this.loading = false;
          },
          () => {
